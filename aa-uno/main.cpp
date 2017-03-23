@@ -28,11 +28,14 @@ int mcd(int a,int b){
 
 int main()
 {
-    string s;
+    string s,pal;
+    cout<<"ingrese una palabra"<<endl;
+    cin>>pal;
     Cesar uno;
 	//cout<<mod(-255,11)<<endl;
 	//cout<<mcd(26,30)<<endl;
-    s=uno.crip("paz",3);
-    cout<<s<<endl;
+    s=uno.crip(pal,3);
+    cout<<"La palabra encriptada es " + s<<endl;
+    cout<<"La palabra final es " +uno.descrip(s,3)<<endl;
 	return 0;
 }
