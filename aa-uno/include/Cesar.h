@@ -7,14 +7,17 @@ using namespace std;
 
 class Cesar
 {
+    int clave;
     public:
-        string abc={"abcdefghijklmnopqrstuvwxyz"};
+        string abc={"abcdefghijklmnopqrstuvwxyz "};
 
-        Cesar();
+        Cesar(int clav);
         virtual ~Cesar();
 
-        string crip(string word, int clave);
-        string descrip(string other, int clave);
+        void setClave(int cl);
+
+        string crip(string word);
+        string descrip(string other);
 };
 
 #endif // CESAR_H
