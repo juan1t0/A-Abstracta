@@ -1,0 +1,16 @@
+# depslib dependency file v1.0
+1490847942 source:/home/juanpablo/ccomph/algebra-abstracta/trans/main.cpp
+	<iostream>
+	<stdio.h>
+	<string>
+	"Trans.h"
+
+1490887968 source:/home/juanpablo/ccomph/algebra-abstracta/trans/src/Trans.cpp
+	"Trans.h"
+
+1490847935 /home/juanpablo/ccomph/algebra-abstracta/trans/include/Trans.h
+	<iostream>
+	<string>
+	<stdio.h>
+	<vector>
+
