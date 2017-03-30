@@ -1,0 +1,18 @@
+alfabeto = abc...z
+claves a,b
+
+mcd(a,abc)=1
+b es como clave cesar
+
+f(c) = M*a+b mod N
+f(d) = M^-a -b mod N
+
+hacer euclides extendido-> return d,x,y
+si x es <0 mod con abc
+generacion de claves aleatorias en el constructor.
+
+constructor 
+emisor  receptor
+alf     alf
+a       -a = x
+b       b
