@@ -16,3 +16,15 @@ emisor  receptor
 alf     alf
 a       -a = x
 b       b
+///---------------------------------------------------------
+
+generador de aleatorio 
+int ga(tamaño seed bits , tamaño en bits del # aleatorio , # de particiones , # de vueltas)
+
+ver foto de alejandro;
+s5 =( s1 + s2 )mod2
+s6 =( s2 + s3 )mod2
+.
+.
+.
+hasta llenar todo el array
