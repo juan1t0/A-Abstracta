@@ -1,16 +1,30 @@
 # depslib dependency file v1.0
-1490847942 source:/home/juanpablo/ccomph/algebra-abstracta/trans/main.cpp
+1491187182 source:/home/juanpablo/ccomph/algebra-abstracta/trans/main.cpp
 	<iostream>
 	<stdio.h>
 	<string>
 	"Trans.h"
 
-1490887968 source:/home/juanpablo/ccomph/algebra-abstracta/trans/src/Trans.cpp
+1491187154 source:/home/juanpablo/ccomph/algebra-abstracta/trans/src/Trans.cpp
 	"Trans.h"
 
-1490847935 /home/juanpablo/ccomph/algebra-abstracta/trans/include/Trans.h
+1491106224 /home/juanpablo/ccomph/algebra-abstracta/trans/include/Trans.h
 	<iostream>
 	<string>
 	<stdio.h>
 	<vector>
+
+1491489448 source:/home/juanpablo/ciencia-d-l-complutacion/algebra-abstracta/trans/src/Trans.cpp
+	"Trans.h"
+
+1491489371 /home/juanpablo/ciencia-d-l-complutacion/algebra-abstracta/trans/include/Trans.h
+	<iostream>
+	<string>
+	<stdio.h>
+
+1491489575 source:/home/juanpablo/ciencia-d-l-complutacion/algebra-abstracta/trans/main.cpp
+	<iostream>
+	<stdio.h>
+	<string>
+	"Trans.h"
 

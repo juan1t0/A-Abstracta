@@ -1,7 +1,6 @@
 #include <iostream>
 #include <string>
 #include <stdio.h>
-#include <vector>
 
 using namespace std;
 #ifndef TRANS_H
@@ -16,8 +15,10 @@ class Trans
 
         string transponer(string);
         string poner(string);
+
     private:
         int clave;
+        void llenar(string*);
 };
 
 #endif // TRANS_H

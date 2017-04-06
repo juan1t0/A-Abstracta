@@ -12,19 +12,19 @@ void sin_space(string *frase){
         frase->erase(j,1);
         j=frase->find(space);
         }
-
 }
-
 int main()
 {
 
-    string h("hola como estas");
+    string h("she is the devil in disguise");
     string *g = &h;
     sin_space(g);
-    cout<<h<<endl;
+//    cout<<h<<endl;
     Trans un(4);
-    string f = un.transponer(h);
+    string f = un.transponer(*g);
     cout<<f<<endl;
- //   cout<<un.poner(f)<<endl;
+ //  for(int i=0;f[i]!='\0';i++)
+   //     cout<<f[i]<<endl;
+    cout<<un.poner(f)<<endl;
     return 0;
 }
