@@ -1,0 +1,16 @@
+# depslib dependency file v1.0
+1491444596 source:/home/juanpablo/ccomph/algebra-abstracta/afin/main.cpp
+	<iostream>
+	<stdio.h>
+	"Afin.h"
+
+1491444586 /home/juanpablo/ccomph/algebra-abstracta/afin/include/Afin.h
+	<iostream>
+	<stdlib.h>
+	<stdio.h>
+	<time.h>
+	<string>
+
+1491445073 source:/home/juanpablo/ccomph/algebra-abstracta/afin/src/Afin.cpp
+	"Afin.h"
+
