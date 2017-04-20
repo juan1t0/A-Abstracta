@@ -7,7 +7,7 @@ using namespace std;
 int main()
 {
     Afin code;
-    string h=code.emitir("to infinit and beyond");
+    string h=code.emitir("To Infinit and Beyond.");
     cout<<h<<endl;
     string g=code.recivir(h);
     cout<<g<<endl;

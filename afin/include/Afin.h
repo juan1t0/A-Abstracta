@@ -12,7 +12,7 @@ using namespace std;
 class Afin
 {
     public:
-        string abc={"abcdefghijklmnopqrstuvwxyz ,"};
+        string abc={"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ ,."};
 
         Afin();
         virtual ~Afin();

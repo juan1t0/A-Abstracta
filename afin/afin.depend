@@ -14,3 +14,18 @@
 1491445073 source:/home/juanpablo/ccomph/algebra-abstracta/afin/src/Afin.cpp
 	"Afin.h"
 
+1491445416 source:/home/juanpablo/ciencia-d-l-complutacion/algebra-abstracta/afin/main.cpp
+	<iostream>
+	<stdio.h>
+	"Afin.h"
+
+1492697032 /home/juanpablo/ciencia-d-l-complutacion/algebra-abstracta/afin/include/Afin.h
+	<iostream>
+	<stdlib.h>
+	<stdio.h>
+	<time.h>
+	<string>
+
+1492697032 source:/home/juanpablo/ciencia-d-l-complutacion/algebra-abstracta/afin/src/Afin.cpp
+	"Afin.h"
+

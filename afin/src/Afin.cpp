@@ -80,8 +80,8 @@ int Afin::getB(){
     int s = abc.size(),b;
 
     srand (time(NULL));
-    b = rand() % s ;
 
+    b = rand() % s ;
     return b;
 }
 
@@ -99,8 +99,12 @@ string Afin::emitir(string origen){
 
     for(int i=0;i<z;i++){
         j=abc.find(origen[i]);
-        aux = (j*a)+b;
-        crip+=abc[mod(aux,s)];
+        aux = mod(j*a,s);
+        aux+=b;
+        if (aux < s)
+            crip+=abc[aux];
+        else
+            crip+=abc[mod(aux,s)];
     }
 
     return crip;
@@ -113,10 +117,14 @@ string Afin::recivir(string crip){
     for(int i=0;i<z;i++){
         j=abc.find(crip[i]);
         aa=(euclidesX(this->a,s,'x'));
-        if (aa <0)
+        if (aa < 0)
             aa=mod(aa,s);
-        aux = (j-b)*aa;
-        master+=abc[mod(aux,s)];
+        aux = mod(j-b,s);
+        aux*=aa;
+        if (aux < s)
+            master+=abc[aux];
+        else
+            master+=abc[mod(aux,s)];
     }
 
     return master;
