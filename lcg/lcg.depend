@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1492696407 source:/home/juanpablo/ciencia-d-l-complutacion/algebra-abstracta/lcg/main.cpp
+	<iostream>
+	<stdlib.h>
+	<time.h>
+	"Lcg.h"
+
+1492215554 source:/home/juanpablo/ciencia-d-l-complutacion/algebra-abstracta/lcg/src/Lcg.cpp
+	"Lcg.h"
+
+1492215554 /home/juanpablo/ciencia-d-l-complutacion/algebra-abstracta/lcg/include/Lcg.h
+	<iostream>
+
