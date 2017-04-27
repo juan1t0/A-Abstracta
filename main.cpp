@@ -37,8 +37,8 @@ int euclides(int a,int b){
 	}
 	return b;
 }
-int mcd(int a, int b,char o){
-    int u=1,g=a,x=0,y=b,r,s,q,v;
+long int mcd(long int a,long int b,char o){
+    long int u=1,g=a,x=0,y=b,r,s,q,v;
     while (y!=0){
         r = mod(g,y);
         q = g/y;
@@ -56,8 +56,10 @@ int mcd(int a, int b,char o){
             u=u+b;
         return u;
     }
-    else if(o=='y')
-        return v;
+    else if(o=='y'){
+        if(v<0)
+            v=v+a;
+        return v;}
     else
         return g;
 }
@@ -106,15 +108,41 @@ int gcd(int a, int b){
 
     }
     return g *b;
+}/*
+int otroeuclidesrecursivo(int a, int b){
+    int i=0,a1=a,b1=b,r;
+    while()
+}*/
+long int potmod(int a,int p, int n){
+    int r=1;
+    for(int i=0;i<p;i++)
+        r=mod(r*a,n);
+    return r;
 }
+long int otrapotmod(int a,int p,int n){
+    int t;
+    if(p==0)
+        return 1;
+    if(mod(p,2)==0){
+        t=otrapotmod(a,p/2,n);
+        return mod(t*t,n);
+    }
+    t=otrapotmod(a,(p-1)/2,n);
+    return mod(a * mod(t*t,n),n);
+}
+
 int main()
 {
     //random(0,3,7,11);
     //cout<<euclidesrecursivo(412,0)<<endl;
     //cout<<euclides(412,260)<<endl;
     ///'x' para la inversa del priemro y 'y' para el del segundo
-   // cout<<mcd(7,480,'y')<<endl;
-    cout<<xx(23,15)<<endl;
-    cout<<gcd(15,2)<<endl;
+   // cout<<mcd(16,0,'x')<<endl;
+   // cout<<xx(23,15)<<endl;
+    //cout<<gcd(15,2)<<endl;
+  /// otroeuclidesrecursivo(36,23);
+    //cout<<otrapotmod(30192,43791,65301)<<endl;
+    //cout<<potmod(30192,43791,65301)<<endl;
+
     return 0;
 }
