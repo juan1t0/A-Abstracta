@@ -1,0 +1,31 @@
+# depslib dependency file v1.0
+1493471672 source:c:\users\asus\desktop\aplicaciones\rsa\main.cpp
+	<iostream>
+	<NTL/ZZ.h>
+	"AriMod.h"
+	<stdlib.h>
+	<time.h>
+	"RSA.h"
+
+1493396799 c:\users\asus\desktop\aplicaciones\rsa\include\arimod.h
+	<vector>
+	<iostream>
+	<NTL/ZZ.h>
+
+1493471672 c:\users\asus\desktop\aplicaciones\rsa\include\rsa.h
+	<iostream>
+	<NTL/ZZ.h>
+	"AriMod.h"
+	<stdlib.h>
+	<time.h>
+
+1493469358 source:c:\users\asus\desktop\aplicaciones\rsa\src\arimod.cpp
+	"AriMod.h"
+	<vector>
+	<iostream>
+	<NTL/ZZ.h>
+	<stdlib.h>
+
+1493471708 source:c:\users\asus\desktop\aplicaciones\rsa\src\rsa.cpp
+	"RSA.h"
+
