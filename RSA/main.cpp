@@ -1,42 +1,48 @@
 #include <iostream>
+#include <fstream>
 #include <NTL/ZZ.h>
 #include "AriMod.h"
 #include <stdlib.h>
-#include <time.h>
+#include <string>
 #include "RSA.h"
 
 using namespace std;
 using namespace NTL;
 
 int main(){
-    srand(time(NULL));
-    RSA receptor;
-    //RSA emisor(to_ZZ(41),to_ZZ(167),to_ZZ(211));
-    //vector<ZZ> texto = emisor.encriptar("Red");
-   // string texto2=receptor.desencriptar(texto);
-   // cout<<texto2<<endl;
-   // RSA r;
-   // int a[]={396,0,19049,16911,12282,2645,23037,21558,2645,26338,6513,14993,23037,6513,26338,2645,19767};
-   // vector<ZZ> s;
-   // for(int i=0;i<17;i++)
-     //   s.push_back(to_ZZ(a[i]));
-     vector<ZZ> texto;
-     int a[]={4696,34987,31361};
-     for(int i=0;i<3;i++)
-        texto.push_back(to_ZZ(a[i]));
-  //  cout<<receptor.desencriptar(texto,to_ZZ(3401),to_ZZ(35237))<<endl;
-    cout<<receptor.desencriptar(texto,to_ZZ(3401),to_ZZ(35237))<<endl;
+/*
+    ///LECTURA
+    ifstream Larchivo,Ldatos;
+    string leido,data;
+    Larchivo.open("textoC.txt");
+    getline(Larchivo,leido);
+    Larchivo.close();
+    Ldatos.open("datos.txt");
+    getline(Ldatos,data);
+    Ldatos.close();
+    ZZ NN=getNWithTap(data);
+    ZZ ee=getEWithTap(data);
+    cout<<NN<<" "<<ee<<endl;*/
+    /*
+    ///ESCRITURA
+    ofstream Enumeros("datos.txt");
+    ofstream Ecifrado("textoC.txt");
+    string nn="N131\te46\tjuanpablo.heredia@ucsp.edu.pe";
+    string cc="6426455785345256347588542";
+    Enumeros<<nn<<endl;
+    Ecifrado<<cc<<endl;
+    Enumeros.close();
+    Ecifrado.close();*/
+
+///----------------------------------------------
+    RSA receptor(18);
+    RSA emisor(receptor.getpp(),receptor.getn());
+//    vector<ZZ>text = emisor.encriptar("Manchester");
+  //  cout<<receptor.desencriptar(text,receptor.geta(),receptor.getn())<<endl;
+   // cout<<potenciaMod(to_ZZ(15252181),to_ZZ(15727521),to_ZZ(727275843))<<endl;
+///----------------------------------------------
+    string mensaje = emisor.cifrar("manchester is red");
+    cout<<mensaje<<endl;
+    cout<<receptor.descifra_mensaje(mensaje)<<endl;
     return 0;
 }
-/**
-publica 41
-privada 3401
-N 35237
-p 167
-q 211
-
-C=34860
-------------------------------------------------
-4696
-34987
-31361 **/
