@@ -14,21 +14,31 @@ class RSA
 {
     private:
         ZZ d;
-      //  ZZ getkd();
-    public:
-        string alfabeto;
         ZZ e;
         ZZ N;
         ZZ p;
         ZZ q;
-        ZZ C;
-        ZZ getkd();
-    void Generar_claves();
-    RSA();
-    RSA(ZZ ,ZZ ,ZZ );
+        string alfabeto;
+    public:
+        RSA(int);
+        RSA(ZZ,ZZ);
+        void Generar_claves(int);
+        virtual ~RSA(void);
+        ZZ getn();
+        ZZ getpp();
+        ZZ geta();
 
-    vector<ZZ> encriptar(string mensaje);
-    string desencriptar(vector<ZZ> mensaje,ZZ,ZZ);
+        ZZ exponenciacion(ZZ,ZZ);
+        ZZ resto_chino (ZZ);
+        string cifrar(string);
+        string descifra_mensaje(string);
+        long euclides(ZZ,ZZ);
+        vector<ZZ> extendido_euclides(ZZ,ZZ);
+        ZZ inversa(ZZ,ZZ);
+///ZZ generar_aleatorio(int);
+        bool test_primalidad(ZZ);
+
+        ZZ getNWithTap(string);
+        ZZ getEWithTap(string);
 };
-
 #endif // RSA_H

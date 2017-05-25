@@ -1,8 +1,6 @@
 #include "AriMod.h"
-#include <vector>
-#include <iostream>
-#include <NTL/ZZ.h>
 #include <stdlib.h>
+#include <time.h>
 
 using namespace std;
 using namespace NTL;
@@ -17,7 +15,15 @@ ZZ modulo(ZZ a, ZZ b){
 	}
 	return r;
 }
-
+string zzToString(ZZ z) {
+    stringstream buffer;
+    buffer << z;
+    return buffer.str();
+}
+ZZ stringTozz(string str){
+    ZZ number(INIT_VAL, str.c_str());
+    return number;
+}
 ZZ euclides(ZZ a, ZZ b){
 	ZZ r=modulo(a,b);
 	while(r>0){
@@ -55,7 +61,12 @@ ZZ potenciaMod(ZZ n, ZZ m, ZZ mod){
 	}
 	return resultado;
 }
-
+ZZ valorAb(ZZ A){
+    if(A >= 0)
+        return A;
+    else
+        return A*(-1);
+}
 ZZ convertir_decimal(vector <bool> a, int bits_num)
 {
     ZZ num;
@@ -106,7 +117,7 @@ ZZ ga(int bits_seed, int bits_num, int particiones, int vueltas)
     }
     for(int i = 0; i < bits_seed; i++)
     {
-        a[i] = rand()%2;
+        a[i] = rand()%2;//to_int(modulo(to_ZZ(rand()),to_ZZ(2)));
     }
     int s = 0;
     for(int i = bits_seed; i < bits_num; i++)
@@ -115,30 +126,27 @@ ZZ ga(int bits_seed, int bits_num, int particiones, int vueltas)
         s++;
     }
     int elementos_pedazo = bits_num/particiones;
-    int residuo_elementos = bits_num%particiones;
-    if(residuo_elementos!=0)
-    {
-        elementos_pedazo += 1;
-    }
+ //   int residuo_elementos = bits_num%particiones;
     int indice = 0;
-    while(indice < bits_num)
+    int cont_particiones = 0;
+    while(cont_particiones < particiones - 1)
     {
-        if((indice + elementos_pedazo) > bits_num)
+        if(cont_particiones%2 == 0)
         {
-            if(particiones%2!=0)
-            {
-                rotar_izquierda(a, indice, residuo_elementos, vueltas);
-                indice += elementos_pedazo;
-            }
-            else
-                rotar_derecha(a, indice, residuo_elementos, vueltas);
-                indice += elementos_pedazo;
+            rotar_izquierda(a, indice, elementos_pedazo, vueltas);
         }
-        rotar_izquierda(a, indice, elementos_pedazo, vueltas);
+        else
+            rotar_derecha(a, indice, elementos_pedazo, vueltas);
         indice += elementos_pedazo;
-        rotar_derecha(a, indice, elementos_pedazo, vueltas);
-        indice += elementos_pedazo;
+        cont_particiones++;
     }
+    if(cont_particiones%2 == 0)
+    {
+        rotar_izquierda(a, indice, bits_num - ((particiones - 1) * elementos_pedazo), vueltas);
+    }
+    else
+        rotar_derecha(a, indice, bits_num - ((particiones - 1) * elementos_pedazo), vueltas);
+
     ZZ num;
     num = convertir_decimal(a, bits_num);
     return num;
