@@ -18,16 +18,13 @@ class RSA
         ZZ N;
         ZZ p;
         ZZ q;
-        string alfabeto;
+        string alfabeto="abcdefghijklmnñopqrstuvwxyz ABCDEFGHIJKLMNÑOPQRSTUVWXYZ0123456789.,;:-_()@{}+/";
+
     public:
         RSA(int);
         RSA(ZZ,ZZ);
-        void Generar_claves(int);
+        void Generar_claves(int);///ZZ generar_aleatorio(int);
         virtual ~RSA(void);
-        ZZ getn();
-        ZZ getpp();
-        ZZ geta();
-
         ZZ exponenciacion(ZZ,ZZ);
         ZZ resto_chino (ZZ);
         string cifrar(string);
@@ -35,10 +32,18 @@ class RSA
         long euclides(ZZ,ZZ);
         vector<ZZ> extendido_euclides(ZZ,ZZ);
         ZZ inversa(ZZ,ZZ);
-///ZZ generar_aleatorio(int);
         bool test_primalidad(ZZ);
 
-        ZZ getNWithTap(string);
-        ZZ getEWithTap(string);
+        void setNWithTap(string);
+        void setEWithTap(string);
+        void setDWithTap(string);
+        void setPWithTap(string);
+        void setQWithTap(string);
+        ZZ getn();
+        ZZ gete();
+        ZZ getd();
+        ZZ getp();
+        ZZ getq();
+
 };
 #endif // RSA_H

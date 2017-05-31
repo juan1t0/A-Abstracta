@@ -4,6 +4,23 @@
 
 using namespace std;
 using namespace NTL;
+ZZ TRC(vector<ZZ> a,vector<ZZ> p){
+    vector<ZZ> q;
+    vector<ZZ> Pi;
+    ZZ P=to_ZZ(1);
+    int sizz = p.size();
+    for(int i=0;i<sizz;i++)
+        P*=p[i];
+    for(int i=0;i<sizz;i++){
+        Pi.push_back(P/p[i]);
+        q.push_back(inversoMult(Pi[i],p[i]));
+    }
+    ZZ R;
+    for(int i=0;i<sizz;i++)
+        R+=modulo(a[i]*q[i]*Pi[i],P);
+    R = modulo(R,P);
+    return R;
+}
 
 ZZ modulo(ZZ a, ZZ b){
 	ZZ q,r;

@@ -3,10 +3,8 @@
 
 RSA::RSA(int bits){
     Generar_claves(bits);
-    alfabeto="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ .,;-";
 }
 RSA::RSA(ZZ publica, ZZ n){
-    alfabeto="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ .,;-";
     e=publica;
     N=n;
 }
@@ -23,17 +21,17 @@ ZZ RSA::exponenciacion(ZZ base,ZZ exp){
     return R;
 }
 long RSA::euclides(ZZ a,ZZ b){///a >= b
-    long mcd=1;
+    long mcd = 1;
     ZZ t;
-    while(modulo(a,to_ZZ(2))==0 && modulo(b,to_ZZ(2))==0){
-        a=a/2;
-        b=b/2;
+    while(modulo(a,to_ZZ(2))== 0 && modulo(b,to_ZZ(2))== 0){
+        a = a/2;
+        b = b/2;
         mcd = mcd*2;
     }
     while(a != 0){
-        while(modulo(a,to_ZZ(2))==0){a=a/2;}
-        while(modulo(b,to_ZZ(2))==0){b=b/2;}
-        t=valorAb(a-b)/2;
+        while(modulo(a,to_ZZ(2))== 0){a = a/2;}
+        while(modulo(b,to_ZZ(2))== 0){b = b/2;}
+        t = valorAb(a-b)/2;
         if(a >= b)
             a = t;
         else
@@ -42,10 +40,10 @@ long RSA::euclides(ZZ a,ZZ b){///a >= b
     return(mcd * to_int(b));
 }
 void RSA::Generar_claves(int bs){
-        int ss=bs/2;
+        int ss=11;
         int pp=sqrt(bs);
         p = ga(ss,bs,pp,13);
-        q = ga(ss,bs,pp,14);
+        q = ga(ss+5,bs,pp,14);
         while(ProbPrime(p,10)!=1)///while(test_primalidad(p)==false)///
         {
             p = ga(ss,bs,pp,13);
@@ -56,7 +54,6 @@ void RSA::Generar_claves(int bs){
         }
         this->N= p * q;
         ZZ phi_N = (p - 1) * (q - 1);
-       // ZZ C=phi_N;
         e = ga(ss,bs,pp,15);
         while(e > phi_N || euclides(e, phi_N) != 1)
         {
@@ -68,8 +65,8 @@ void RSA::Generar_claves(int bs){
         cout <<"N: " << N << endl;
 }
 bool RSA::test_primalidad(ZZ x){
-    ZZ a = modulo(ga(10,16,4,7),x-2)+1;
-    if(potenciaMod(a,x-1,x)==1)
+    ZZ a = modulo(ga(10,16,4,8),x-2)+1;
+    if(potenciaMod(a,x-1,x)== 1)
         return true;
     else
         return false;
@@ -117,9 +114,9 @@ string RSA::cifrar(string mensaje){
     string msn;
     string dig;
     ZZ Dig;
-    int pos;
+    int pos, sizeOfMensaje = mensaje.size();
     ///PROCESAMIENTO DEL TEXTO
-    for(int i=0;i<mensaje.size();i++){
+    for(int i=0;i<sizeOfMensaje;i++){
         pos = alfabeto.find(mensaje[i]);
         if(pos<10)
             dig+="0";
@@ -128,27 +125,26 @@ string RSA::cifrar(string mensaje){
     ZZ temp = to_ZZ(dig.size());
     ZZ nless1= to_ZZ(zzToString(this->N).size() -1);
     while(modulo(temp,nless1)!= 0){
-        pos = alfabeto.find("-");
+        pos = alfabeto.find("w");
         dig+=zzToString(to_ZZ(pos));
         temp=to_ZZ(dig.size());
     }
-    //----------------------------------
-    cout<<dig<<endl;
+    ///----------------------------------
     string aux;
     string axe;
-    for(int i=0;i<dig.size();i+=to_int(nless1)){
+    int sizeOFDig=dig.size(),nm1=to_int(nless1);
+    for(int i=0;i<sizeOFDig;i+=nm1){
         int j=0;
-        while(j != to_int(nless1)){
+        while(j != nm1){
             aux+=dig[i+j];
             j++;
         }
-        Dig=stringTozz(aux);
+        Dig = stringTozz(aux);
         Dig = exponenciacion(Dig,this->e);
         aux = zzToString(Dig);
-        int a= aux.size();
+        int a = aux.size();
         while(to_ZZ(a) < nless1+1){
-            a++;
-            axe+="0";
+            a++; axe += "0";
         }
         axe+=aux;
         msn+=axe;
@@ -159,27 +155,30 @@ string RSA::cifrar(string mensaje){
 string RSA::descifra_mensaje(string cifrado){
     string msn;
     string dig;
+
     ZZ Dig;
     ZZ nlen = to_ZZ(zzToString(this->N).size());
-    int pos=0;
+
+    int pos=0 , sizeOfCifrado = cifrado.size(), nlo=to_int(nlen);
     string aux;
-    for(int i=0;i<cifrado.size();i+=to_int(nlen)){
+    for(int i=0;i<sizeOfCifrado;i+=nlo){
         int j=0;
-        while(j != to_int(nlen)){
-            aux+=cifrado[i+j];
+        while(j < nlo){
+            aux+=cifrado[j+i];
             j++;
         }
         Dig = stringTozz(aux);
         Dig = resto_chino(Dig);
         aux = zzToString(Dig);
         int a=aux.size();
-        while(a<to_int(nlen-1)){
+        while(a<nlo-1){
             dig += "0";a++;}
         dig+=aux;
         aux="";
     }
     aux="";
-    for(int i=0;i<dig.size();i+=2){
+    int sizeOfDig = dig.size();
+    for(int i=0;i<sizeOfDig;i+=2){
         int j=0;
         while(j != 2){
             aux+=dig[i+j];
@@ -193,10 +192,12 @@ string RSA::descifra_mensaje(string cifrado){
     return msn;
 }
 ZZ RSA::getn(){return N;}
-ZZ RSA::getpp(){return e;}
-ZZ RSA::geta(){return d;}
+ZZ RSA::gete(){return e;}
+ZZ RSA::getd(){return d;}
+ZZ RSA::getp(){return p;}
+ZZ RSA::getq(){return q;}
 
-ZZ RSA::getNWithTap(string tp){
+void RSA::setNWithTap(string tp){
     int p=tp.find('N');
     string num;
     p++;
@@ -204,9 +205,9 @@ ZZ RSA::getNWithTap(string tp){
         num+=tp[p];
         p++;
     }
-    return stringTozz(num);
+    this->N= stringTozz(num);
 }
-ZZ RSA::getEWithTap(string tp){
+void RSA::setEWithTap(string tp){
     int p=tp.find('e');
     string num;
     p++;
@@ -214,5 +215,113 @@ ZZ RSA::getEWithTap(string tp){
         num+=tp[p];
         p++;
     }
-    return stringTozz(num);
+    this->e= stringTozz(num);
 }
+void RSA::setDWithTap(string tp){
+    int p=tp.find('d');
+    string num;
+    p++;
+    while(tp[p]!='\t'){
+        num+=tp[p];
+        p++;
+    }
+    this->d= stringTozz(num);
+}
+void RSA::setPWithTap(string tp){
+    int p=tp.find('p');
+    string num;
+    p++;
+    while(tp[p]!='\t'){
+        num+=tp[p];
+        p++;
+    }
+    this->p= stringTozz(num);
+}
+void RSA::setQWithTap(string tp){
+    int p=tp.find('q');
+    string num;
+    p++;
+    while(tp[p]!='\t'){
+        num+=tp[p];
+        p++;
+    }
+    this->q= stringTozz(num);
+}
+
+
+/**
+string RSA::cifrar(string mensaje){
+        string message;
+        string temp="";
+        string letra;
+        string aux;
+        ZZ num;
+        int tam = zzToString(to_ZZ(alfabeto.length()-1)).length();
+        int tamN= zzToString(N).length();
+        for(int i=0;i<mensaje.length();i++){
+                letra=zzToString(to_ZZ(alfabeto.find(mensaje[i])));
+                while(letra.length()<tam){
+                    aux=letra;
+                    letra="0";
+                    letra+=aux;
+                }
+                temp+=letra;
+        }
+        while(temp.length()%(tamN-1)!=0){
+                temp+=zzToString(to_ZZ(alfabeto.find("#")));
+        }
+        for(int i=0;i<temp.length();i+=tamN-1){
+            letra="";
+            for(int j=0;j<tamN-1;j++){
+                letra+=temp[j+i];
+            }
+            num=potenciaMod(stringTozz(letra),e,N);
+            letra=zzToString(num);
+            while(letra.length()<tamN){
+                aux=letra;
+                letra="0";
+                letra+=aux;
+            }
+            message+=letra;
+        }
+        return message;
+}*/
+/**
+string RSA::descifra_mensaje(string mensaje){
+        string message;
+        string letra;
+        string temp;
+        string aux;
+        ZZ num;
+        int tam = zzToString(to_ZZ(alfabeto.length()-1)).length();
+        int tamN= zzToString(N).length();
+        for(int i=0;i<mensaje.length();i+=tamN){
+            letra="";
+            for(int j=0;j<tamN;j++){
+                letra+=mensaje[j+i];
+            }
+            num=stringTozz(letra);
+            letra=zzToString(resto_chino(num));
+            while(letra.length()<tamN-1){
+                aux=letra;
+                letra="0";
+                letra+=aux;
+            }
+            temp+=letra;
+        }
+        for(int i=0;i<temp.length();i+=tam){
+            letra="";
+            for(int j=0;j<tam;j++){
+                letra+=temp[j+i];
+            }
+            message+=alfabeto[to_int(stringTozz(letra))];
+        }
+        while(message[message.length()-1]=='#'){
+            aux="";
+            for(int i=0;i<message.length()-1;i++)
+                aux+=message[i];
+            message=aux;
+        }
+        return message;
+}*/
+

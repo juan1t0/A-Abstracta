@@ -20,4 +20,5 @@ void rotar_izquierda(vector <bool> &vec, int indice, int elementos, int vueltas)
 ZZ ga(int bits_seed, int bits_num, int particiones, int vueltas);
 string zzToString(ZZ);
 ZZ stringTozz(string);
+ZZ TRC(vector<ZZ>,vector<ZZ>);
 #endif // ARIMOD_H
