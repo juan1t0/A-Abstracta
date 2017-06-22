@@ -153,7 +153,7 @@ ZZ Primitiva(ZZ p){
         if((potenciaMod(g,to_ZZ(2),p)!=1) && (potenciaMod(g,q,p)!= 1))
             return g;
     }
-   // return g;
+    return g;
 }
 string numberToString(int a){
     stringstream ss;

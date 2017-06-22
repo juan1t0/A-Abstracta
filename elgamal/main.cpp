@@ -6,46 +6,89 @@
 #include "ElGamal.h"
 #include "AriMod.h"
 #include "GA.h"
-
 using namespace std;
 using namespace NTL;
 
-int main()
-{
-    ElGamal r;
-    ElGamal receptor(64);
-    ZZ a = receptor.getE1(),b=receptor.getE2(),c=receptor.getP();
-    ElGamal emisor(a,b,c);
-    cout<<"<------------------------------------>"<<endl;
-    string l = emisor.cifrar("Oculto por la noche, pero con paso firme. Tenhido por la sangre, pero con la mente despejada.");
-    ///string l = emisor.cifrar("Escuchad mis palabras, sed testigos de mi juramento...   La noche se avecina, ahora empieza mi guardia. No terminara hasta el dia de mi muerte. No tomare esposa, no poseere tierras, no engendrare hijos. No llevare corona, no alcanzare la gloria. Vivire y morire en mi puesto.  ...Soy la espada en la oscuridad. Soy el vigilante del muro. Soy el fuego que arde contra el frio, la luz que trae el amanecer, el cuerno que despierta a los durmientes, el escudo que defiende los reinos de los hombres. Entrego mi vida y mi honor a la Guardia de la Nocha, durante esta noche y todas las que esten por venir. JuanPablo Andrew Heredia Parillo juanpablo.heredia ucsp.edu.pe");
-    cout<<"<------------------------------------>"<<endl;
-    ///ESCRITURA
-    ofstream Enumeros("datos.txt"), Emisk("claves.txt");
-    ofstream Ecifrado("textoC.txt");
-    string mm="p: "+zzToString(receptor.getP())+"\te1: "+zzToString(receptor.getE1())+"\te2: "+zzToString(receptor.getE2())+"\td: "+zzToString(receptor.getD())+"\t";
-    string nn="p: "+zzToString(receptor.getP())+"\te1: "+zzToString(receptor.getE1())+"\te2: "+zzToString(receptor.getE2())+"\t";
-    Enumeros<<nn<<endl;
-    Ecifrado<<l<<endl;
-    Emisk<<mm<<endl;
-    Enumeros.close();
-    Ecifrado.close();
-    Emisk.close();
-    cout<<"<------------------------------------>"<<endl;
-    ///LECTURA
-    ifstream Larchivo("textoC.txt");
-    string leido;
-    getline(Larchivo,leido);
-    Larchivo.close();
-    cout<<leido<<endl;
-    cout<<"<------------------------------------>"<<endl;
-    ///...........................
- /*   r.setD(stringTozz("98919550896239194854906140153435563189"));//receptor.getD());//
-    r.setP(stringTozz( "218964166342698383526704352558440058859"));//receptor.getP());//
-    r.setE1(stringTozz("218964166342698383526704352558440058855"));//receptor.getE1());//
-    r.setE2(stringTozz("96468936020080527800261360124222437938"));//receptor.getE2());//
-    ///...........................*/
-   // cout<<r.descifra_mensaje(leido);/**
-    cout<<receptor.descifra_mensaje(leido);
+int main(){
+///variables
+    char opcion;
+    ZZ e1,e2,P;
+    string cinE, cinN,cinTxt,opciondEncr;
+    string cText;
+    ifstream texto;
+    string plainText,encriptado,desencrip;
+    ofstream cifrado;
+///first menu
+    cout<<"  ______________________________________  "<<endl;
+    cout<<"||--------------------------------------||"<<endl;
+    cout<<"||          - - - ElGamal - - -         ||"<<endl;
+    cout<<"||______________________________________||"<<endl;
+    cout<<"  --------------------------------------  "<<endl;
+    cout<<endl<<"Bienvenido a El Gamal"<<endl<<"Ingrese una opcion:"<<endl;
+    cout<<"0 -> Salir"<<endl;
+    cout<<"1 -> Encriptar"<<endl;
+    cout<<"2 -> Desencriptar"<<endl;
+///create ElGamal
+    ElGamal receptor(16);
+///main menu
+    while(true){
+        cout<<"Ingrese una opcion:"<<endl;
+        cin>>opcion;
+        if(opcion == '0'){
+            break;}
+        else if(opcion == '1'){
+cout<<"--------------Encriptar---------------"<<endl;
+            cout<<"Clave Publica 1 (e1)"<<endl;cin>>cinE;
+            e1 = stringTozz(cinE);
+            cout<<"Clave Publica 2 (e2)"<<endl;cin>>cinE;
+            e2 = stringTozz(cinE);
+            cout<<"Ingrese p"<<endl;cin>>cinN;
+            P = stringTozz(cinN);
+            ElGamal emisor(e1,e2,P);
+            cout<<"Para ingresar .txt pulse 1, para ingresar su propio texto 2"<<endl;
+            cin>>opcion;
+            if(opcion == '1'){
+                cin>>opciondEncr;
+                texto.open(opciondEncr);
+                getline(texto,plainText);
+                texto.close();
+            }
+            else if(opcion == '2')
+                cin>>plainText;
+            else{
+                cout<<"upps! opcion incorrecta, regresas al menu principal"<<endl;
+                continue;
+            }
+            encriptado = emisor.cifrar(plainText);
+            cout<<encriptado<<endl;
+            cifrado.open("Cifrado.txt");
+            cifrado<<encriptado<<endl;
+            cifrado.close();
+            }
+        else if(opcion == '2'){
+cout<<"-------------Desencriptar--------------"<<endl;
+            cout<<"Para ingresar su texto cifrado por .txt pulse 1, para hacerlo directo 2"<<endl;
+            cin>>opcion;
+            if(opcion == '1'){
+                cin>>cinTxt;
+                texto.open(cinTxt);
+                getline(texto,cText);
+                texto.close();
+            }
+            else if(opcion == '2')
+                cin>>cText;
+            else{
+                cout<<"upps! opcion incorrecta, regresas al menu principal"<<endl;
+                continue;
+            }
+            desencrip=receptor.descifra_mensaje(cText);
+            cout<<desencrip<<endl;
+            }
+        else
+            cout<<"upps! ...opcion invalida"<<endl;
+    }
+///fin
+    cout<<"Hasta Luego"<<endl;
+
     return 0;
 }

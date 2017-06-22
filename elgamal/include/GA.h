@@ -16,4 +16,6 @@ ZZ decimal(vector <bool> , int );
 int rdtsc();
 ZZ ga(int , int , int , int );
 
+vector<ZZ> DES(void);
+void simpleDesplazamientoIzq(vector<bool> *x);
 #endif // GA_H
